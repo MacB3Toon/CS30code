@@ -26,8 +26,6 @@ function draw() {
   for (let i = xoffset; i < xoffset + width; i++){
     rect(terrain[i].x - xoffset, height - terrain[i].height, 1, terrain[i].height);
   }
-
-  
 }
 
 function spawnRectangles(){
