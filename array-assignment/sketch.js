@@ -14,6 +14,6 @@ function draw() {
   background(225);
 }
 
-function topLeftCorner(){
+function middle(){
   
 }
