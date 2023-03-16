@@ -5,57 +5,35 @@
 // Extra for Experts:
 // - describe what you did to take this project "above and beyond"
 
+let x = 0;
+let y = 0;
+
 function setup() {
   createCanvas(windowWidth, windowHeight);
-  makeGrid();
+  background(0);
+  // drawSquares();
 }
 
 function draw() {
-  lightcycleGood();
-  lightcycleBad();
+  
 }
 
-function makeGrid(){
-  for (let x = 0; x < windowWidth; x += 40){
-    for (let y = 0; y < windowHeight; y += 40){
-      stroke(0, 134, 134);
-      fill(0);
-      rect(x, y, 40);
-    }
-  }
-}
+let rectWidth = random(20, 100);
+let rectHeight = random(0, 100);
+fill(random(0, 255), random(0, 210), 255);
 
-//Good lightcycle controlled by user
-function lightcycleGood(){
-  let x = windowWidth/2;
-  let y = windowHeight/2;
-  rectMode(CENTER);
-  stroke(131, 210, 255);
-  fill(68, 177, 240);
-  rect(x, y - 100, 20, 40, 10);
- for (let i = 1; i < 0; i++){
-   if (keyIsDown(UP_ARROW)){
-    y += 5;
-   }
-   else if (keyIsDown(RIGHT_ARROW)){
-//   //     x += 5;
-//   //   }
-//   //   else if (keyIsDown(LEFT_ARROW)){
-//   //     x -= 5; 
-//   //   }
-//   //   else if (keyIsDown(DOWN_ARROW)){
-//   //     y -= 5; 
-//   //   }
-//   // }
+square(x, y, rectWidth, rectHeight);
+
+// function drawSquares(){
+//   while (windowWidth >= 0){
+
+//     let rectWidth = random(0, 100);
+//     let rectHeight = random(0, 100);
+//     fill(random(0, 255), random(0, 210), 255);
+
+//     square(x, y, rectWidth, rectHeight);
+
+//     x += rectWidth;
+//     y += rectHeight;
+//   }
 // }
-
-
-//Bad lightcycle controlled by computer
-function lightcycleBad(){
-  let x = windowWidth/2;
-  let y = windowHeight/2;
-  rectMode(CENTER);
-  stroke(255, 155, 75);
-  fill(190, 125, 40);
-  rect(x, y + 100, 20, 40, 10);
-}
