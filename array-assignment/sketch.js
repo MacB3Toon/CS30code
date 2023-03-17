@@ -11,29 +11,24 @@ let y = 0;
 function setup() {
   createCanvas(windowWidth, windowHeight);
   background(0);
-  // drawSquares();
+  drawSquares();
 }
 
 function draw() {
   
 }
 
-let rectWidth = random(20, 100);
-let rectHeight = random(0, 100);
-fill(random(0, 255), random(0, 210), 255);
+function drawSquares(){
+  for (let i = 0; i < windowHeight; i++){
+    for (let i = 0; i < windowWidth; i++){
 
-square(x, y, rectWidth, rectHeight);
-
-// function drawSquares(){
-//   while (windowWidth >= 0){
-
-//     let rectWidth = random(0, 100);
-//     let rectHeight = random(0, 100);
-//     fill(random(0, 255), random(0, 210), 255);
-
-//     square(x, y, rectWidth, rectHeight);
-
-//     x += rectWidth;
-//     y += rectHeight;
-//   }
-// }
+      let rectWidth = random(50, 150);
+      let rectHeight = random(50, 150);
+      fill(random(170, 255), random(0, 170), 255);
+      rect(x, y, rectWidth, rectHeight);
+  
+      x += rectWidth;
+    }
+    y += rectHeight;
+  }
+}
