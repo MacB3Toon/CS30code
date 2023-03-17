@@ -8,6 +8,13 @@
 let x;
 let y;
 
+let cycleGood = {
+  x: windowWidth * 2,
+  y: windowHeight * 2 - 100,
+  width: 20,
+  height: 40,
+};
+
 function setup() {
   createCanvas(windowWidth, windowHeight);
   makeGrid();
