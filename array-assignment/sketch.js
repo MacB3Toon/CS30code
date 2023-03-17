@@ -7,6 +7,8 @@
 
 let x = 0;
 let y = 0;
+let rectWidth;
+let rectHeight;
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
@@ -19,16 +21,13 @@ function draw() {
 }
 
 function drawSquares(){
-  for (let i = 0; i < windowHeight; i++){
-    for (let i = 0; i < windowWidth; i++){
+  for (let i = 0; i < windowWidth; i++){
 
-      let rectWidth = random(50, 150);
-      let rectHeight = random(50, 150);
-      fill(random(170, 255), random(0, 170), 255);
-      rect(x, y, rectWidth, rectHeight);
+    rectWidth = random(50, 150);
+    rectHeight = random(50, 150);
+    fill(random(170, 255), random(0, 170), 255);
+    rect(x, y, rectWidth, rectHeight);
   
-      x += rectWidth;
-    }
-    y += rectHeight;
+    x += rectWidth;
   }
 }
