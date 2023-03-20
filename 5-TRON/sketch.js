@@ -16,7 +16,6 @@ function setup() {
   
   x = windowWidth/2;
   y = windowHeight/2;
-  ranNum = Math.round(random(500));
 }
 
 function draw() {
@@ -98,13 +97,13 @@ function lightcycleBad(){
       if (i % 2 === 0){
         direction = "up";
       }
-      else if (i % 2 != 0){
+      else if (i % 2 !== 0){
         direction = "down";
       }
       else if (i % 3 === 0){
         direction = "left";
       }
-      else if (i % 3 != 0){
+      else if (i % 3 !== 0){
         direction = "right";
       }
     }
@@ -113,25 +112,25 @@ function lightcycleBad(){
 
   //turning the direction of the orange rect
   if (direction === "up"){
-    y -= 5
+    y -= 5;
     positionBad[1] = y;
     cycleBad.width = 20;
     cycleBad.height = 40;
   }
   if (direction === "down"){
-    y += 5
+    y += 5;
     positionBad[1] = y;
     cycleBad.width = 20;
     cycleBad.height = 40;
   }
   if (direction === "left"){
-    x -= 5
+    x -= 5;
     positionBad[0] = x;
     cycleBad.width = 40;
     cycleBad.height = 20;
   }
   if (direction === "right"){
-    x += 5
+    x += 5;
     positionBad[0] = x;
     cycleBad.width = 40;
     cycleBad.height = 20;
@@ -144,22 +143,22 @@ function lightcycleBad(){
 //check the distance between the two lightcycles to see if they've crashed
 function checkDistance(){
   if (positionGood[0] <= positionBad[0]){
-    distanceX = (positionBad[0] - positionGood[0]);
+    distanceX = positionBad[0] - positionGood[0];
   }
   else if (positionGood[0] >= positionBad[0]){
-    distanceX = (positionGood[0] - positionbad[0]);
+    distanceX = positionGood[0] - positionBad[0];
   }
 
   if (positionGood[1] <= positionBad[1]){
-    distanceY = (positionBad[1] - positionGood[1]);
+    distanceY = positionBad[1] - positionGood[1];
   }
   else if (positionGood[1] >= positionBad[1]){
-    distanceY = (positionGood[1] - positionbad[1]);
+    distanceY = positionGood[1] - positionBad[1];
   }
 
-  if ((distanceX <= 20) || (distanceY <= 20)){
+  if (distanceX <= 20 || distanceY <= 20){
     fill("red");
-    rect(x, y, (windowWidth - windowWidth/4), (windowHeight - windowHeight/4));
+    rect(x, y, windowWidth - windowWidth/4, windowHeight - windowHeight/4);
     textSize(50);
     text("GAME OVER", x, y);
   }
