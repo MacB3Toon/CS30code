@@ -10,41 +10,51 @@ let direction;
 let distanceX;
 let distanceY;
 
+let cycleGood;
+let cycleBad;
+
 function setup() {
   createCanvas(windowWidth, windowHeight);
   makeGrid();
-  
+  cycleGood = {
+    x: windowWidth / 2,
+    y: windowHeight / 2 - 100,
+    width: 20,
+    height: 40,
+  };
+
+  cycleBad = {
+    x: windowWidth / 2,
+    y: windowHeight / 2 + 100,
+    width: 20,
+    height: 40,
+  };
+
   x = windowWidth/2;
   y = windowHeight/2;
 }
 
 function draw() {
-  makeGrid();
-  lightcycleGood();
-  lightcycleBad();
+
+  lightcycleGood(cycleGood);
+  lightcycleBad(cycleBad);
   checkDistance();
+
 }
 
 function makeGrid(){
-  for (let x = 0; x < windowWidth; x += 40){
-    for (let y = 0; y < windowHeight; y += 40){
+  for (let x1 = 0; x1 < windowWidth; x1 += 40){
+    for (let y1 = 0; y1 < windowHeight; y1 += 40){
       stroke(0, 134, 134);
       fill(0);
-      rect(x, y, 40);
+      rect(x1, y1, 40);
     }
   }
 }
 
 //Good lightcycle controlled by user
-function lightcycleGood(){
+function lightcycleGood(cycleGood){
 
-  let cycleGood = {
-    x: windowWidth * 2,
-    y: windowHeight * 2 - 100,
-    width: 20,
-    height: 40,
-  };
-  
   rectMode(CENTER);
   stroke(131, 210, 255);
   fill(68, 177, 240);
@@ -73,19 +83,12 @@ function lightcycleGood(){
     cycleGood.width = 20;
     cycleGood.height = 40;
   }
-  rect(x, y - 100, cycleGood.width, cycleGood.height, 10);
-  //rect(cycleGood.x, cycleGood.y, cycleGood.width, cycleGood.height, 10);
+
+  rect(cycleGood.x, cycleGood.y, cycleGood.width, cycleGood.height, 10);
 }
 
 //Bad lightcycle controlled by computer
-function lightcycleBad(){
-
-  let cycleBad = {
-    x: windowWidth * 2,
-    y: windowHeight * 2 + 100,
-    width: 20,
-    height: 40,
-  };
+function lightcycleBad(cycleBad){
 
   rectMode(CENTER);
   stroke(255, 155, 75);
@@ -136,12 +139,12 @@ function lightcycleBad(){
     cycleBad.height = 20;
   }
 
-  rect(x, y + 100, cycleBad.width, cycleBad.height, 10);
-  //rect(cycleBad.x, cycleBad.y, cycleBad.width, cycleBad.height, 10);
+  rect(cycleBad.x, cycleBad.y, cycleBad.width, cycleBad.height, 10);
 }
 
 //check the distance between the two lightcycles to see if they've crashed
 function checkDistance(){
+  //check x position
   if (positionGood[0] <= positionBad[0]){
     distanceX = positionBad[0] - positionGood[0];
   }
@@ -149,6 +152,7 @@ function checkDistance(){
     distanceX = positionGood[0] - positionBad[0];
   }
 
+  //check y position
   if (positionGood[1] <= positionBad[1]){
     distanceY = positionBad[1] - positionGood[1];
   }
@@ -156,6 +160,7 @@ function checkDistance(){
     distanceY = positionGood[1] - positionBad[1];
   }
 
+  //display game over because it crashed
   if (distanceX <= 20 || distanceY <= 20){
     fill("red");
     rect(x, y, windowWidth - windowWidth/4, windowHeight - windowHeight/4);
