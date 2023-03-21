@@ -2,14 +2,18 @@
 // Macayla Buckmaster
 // March 19, 2023
 
+//Extra For Experts
+//I spent loads of time unpacking random and trying to figure out millis. 
+
 let x;
 let y;
 let positionGood = [x, y];
 let positionBad = [x, y];
-let direction;
 let distanceX;
 let distanceY;
-
+let directions;
+let setDirection;
+let ranNum;
 let cycleGood;
 let cycleBad;
 
@@ -35,10 +39,9 @@ function setup() {
 }
 
 function draw() {
-
   lightcycleGood(cycleGood);
   lightcycleBad(cycleBad);
-  checkDistance();
+  //checkDistance();
 
 }
 
@@ -94,77 +97,67 @@ function lightcycleBad(cycleBad){
   stroke(255, 155, 75);
   fill(190, 125, 40);
 
-  //randomizing the direction of the orange rect
-  for (let i = 0; i < windowWidth; i++){
-    if(millis() % 2000 === 0){
-      if (i % 2 === 0){
-        direction = "up";
-      }
-      else if (i % 2 !== 0){
-        direction = "down";
-      }
-      else if (i % 3 === 0){
-        direction = "left";
-      }
-      else if (i % 3 !== 0){
-        direction = "right";
-      }
-    }
-    return direction;
-  }
+  directions = ["up", "down", "left", "right"];
+  setDirection = directions[Math.floor(Math.random() * directions.length)];
 
   //turning the direction of the orange rect
-  if (direction === "up"){
-    y -= 5;
-    positionBad[1] = y;
-    cycleBad.width = 20;
-    cycleBad.height = 40;
-  }
-  if (direction === "down"){
-    y += 5;
-    positionBad[1] = y;
-    cycleBad.width = 20;
-    cycleBad.height = 40;
-  }
-  if (direction === "left"){
-    x -= 5;
-    positionBad[0] = x;
-    cycleBad.width = 40;
-    cycleBad.height = 20;
-  }
-  if (direction === "right"){
-    x += 5;
-    positionBad[0] = x;
-    cycleBad.width = 40;
-    cycleBad.height = 20;
-  }
+  ranNum = Math.floor(random() * 10);
+  if (ranNum % 3 === 0){
+    for (let i = 0; i < ranNum; i++){
+      if (setDirection === "up"){
+        cycleBad.y -= 5;
+        positionBad[1] = y;
+        cycleBad.width = 20;
+        cycleBad.height = 40;
+      }
+      if (setDirection === "down"){
+        cycleBad.y += 5;
+        positionBad[1] = y;
+        cycleBad.width = 20;
+        cycleBad.height = 40;
+      }
+      if (setDirection === "left"){
+        cycleBad.y -= 5;
+        positionBad[0] = x;
+        cycleBad.width = 40;
+        cycleBad.height = 20;
+      }
+      if (setDirection === "right"){
+        cycleBad.y += 5;
+        positionBad[0] = x;
+        cycleBad.width = 40;
+        cycleBad.height = 20;
+      }
 
-  rect(cycleBad.x, cycleBad.y, cycleBad.width, cycleBad.height, 10);
+      rect(cycleBad.y, cycleBad.y, cycleBad.width, cycleBad.height, 10);
+    }
+  }
 }
 
 //check the distance between the two lightcycles to see if they've crashed
-function checkDistance(){
-  //check x position
-  if (positionGood[0] <= positionBad[0]){
-    distanceX = positionBad[0] - positionGood[0];
-  }
-  else if (positionGood[0] >= positionBad[0]){
-    distanceX = positionGood[0] - positionBad[0];
-  }
+// function checkDistance(){
+//   //check x position
+//   if (positionGood[0] <= positionBad[0]){
+//     distanceX = positionBad[0] - positionGood[0];
+//   }
+//   else if (positionGood[0] >= positionBad[0]){
+//     distanceX = positionGood[0] - positionBad[0];
+//   }
 
-  //check y position
-  if (positionGood[1] <= positionBad[1]){
-    distanceY = positionBad[1] - positionGood[1];
-  }
-  else if (positionGood[1] >= positionBad[1]){
-    distanceY = positionGood[1] - positionBad[1];
-  }
+//   //check y position
+//   if (positionGood[1] <= positionBad[1]){
+//     distanceY = positionBad[1] - positionGood[1];
+//   }
+//   else if (positionGood[1] >= positionBad[1]){
+//     distanceY = positionGood[1] - positionBad[1];
+//   }
 
-  //display game over because it crashed
-  if (distanceX <= 20 || distanceY <= 20){
-    fill("red");
-    rect(x, y, windowWidth - windowWidth/4, windowHeight - windowHeight/4);
-    textSize(50);
-    text("GAME OVER", x, y);
-  }
-}
+//   //display game over because it crashed
+//   if (distanceX <= 20 || distanceY <= 20){
+//     fill("red");
+//     rect(x, y, windowWidth - windowWidth/4, windowHeight - windowHeight/4);
+//     textSize(50);
+//     fill("black");
+//     text("GAME OVER", x, y);
+//   }
+// }
