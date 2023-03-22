@@ -1,5 +1,5 @@
 // Color Game
-// Dan Schellenberg
+// Macayla Buckmaster
 // March 21, 2023
 
 const ROWS = 4;
