@@ -12,3 +12,4 @@
 
 ##projects
 -[Arrays and object notation](array-assignment)
+-[2d array assignment](cat-game)
