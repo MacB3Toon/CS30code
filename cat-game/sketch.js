@@ -5,14 +5,20 @@
 // Extra for Experts:
 // - Uploaded an image and moved it based on where the user clicked
 
+//define middle
+//get cat to move to empty square randomly
+//set size of grid to be based on window width and height
+//make the cat change img when it moves
+
 const XROWS = 21;
 const YCOLS = 35;
 let grid;
 let cellSize; //size of squares
-let img = createImage();
+let cat;
+let middle;
 
 function preload(){
-
+  cat = loadImage("cat-head.png");
 }
 
 function setup() {
@@ -32,7 +38,7 @@ function setup() {
 
 function draw() {
   background(220);
-  displayGrid(grid);
+  displayGame(grid);
 }
 
 function keyTyped(){
@@ -46,6 +52,11 @@ function mousePressed() {
   let y = Math.floor(mouseY/cellSize);
 
   toggleCell(x, y);
+  moveCat();
+}
+
+function moveCat(){
+
 }
 
 function toggleCell(x, y) {
@@ -60,14 +71,16 @@ function toggleCell(x, y) {
   }
 }
 
-function displayGrid(grid) {
+function displayGame(grid) {
+  imageMode(CENTER);
+  image(cat, middle, middle);
   for (let y = 0; y < XROWS; y++) {
     for (let x = 0; x < YCOLS; x++) {
       if (grid[y][x] === 0) {
         fill(153, 255, 153);
       }
       if (grid[y][x] === 1) {
-        fill(0, 195, 0);
+        fill(39, 93, 45);
       }
       rect(x*cellSize, y*cellSize, cellSize, cellSize);
     }
