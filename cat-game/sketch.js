@@ -5,17 +5,18 @@
 // Extra for Experts:
 // - Uploaded an image and moved it based on where the user clicked
 
-//define middle
 //get cat to move to empty square randomly
 //set size of grid to be based on window width and height
 //make the cat change img when it moves
+//add texturess use 10
+//wherever the cat is in the moment is basically just displaying one cell 
 
-const XROWS = 21;
-const YCOLS = 35;
+const XROWS = 15;
+const YCOLS = 29;
 let grid;
 let cellSize; //size of squares
 let cat;
-let middle;
+let direction = ["up", "down", "left", "right"];
 
 function preload(){
   cat = loadImage("cat-head.png");
@@ -34,11 +35,13 @@ function setup() {
   }
 
   grid = restartGame(XROWS, YCOLS);
+  drawCat();
 }
 
 function draw() {
   background(220);
   displayGame(grid);
+  drawCat();
 }
 
 function keyTyped(){
@@ -56,13 +59,19 @@ function mousePressed() {
 }
 
 function moveCat(){
+  random(direction);
+}
+
+function drawCat(){
+  image(cat, cellSize*14, cellSize*8, cellSize, cellSize); //figure out x y
 
 }
 
 function toggleCell(x, y) {
   //sanity check
+  //0 = floor, 1 = wall. 
   if (x >= 0 && x < YCOLS && y >= 0 && y < XROWS) {
-    if (grid[y][x] === 0) {
+    if (grid[y][x] === 0) { 
       grid[y][x] = 1;
     }
     else if (grid[y][x] === 1) {
@@ -73,7 +82,6 @@ function toggleCell(x, y) {
 
 function displayGame(grid) {
   imageMode(CENTER);
-  image(cat, middle, middle);
   for (let y = 0; y < XROWS; y++) {
     for (let x = 0; x < YCOLS; x++) {
       if (grid[y][x] === 0) {
