@@ -6,10 +6,11 @@
 // - Uploaded an image and moved it based on where the user clicked
 
 //get cat to move to empty square randomly
-//set size of grid to be based on window width and height
+//set size of grid to be based on window width and height use performer 11?
 //make the cat change img when it moves
 //add texturess use 10
-//wherever the cat is in the moment is basically just displaying one cell 
+//wherever the cat is in the moment is basically just displaying one cell DO THIS FIRST USE 10 AS DEMO IT SHOULD WORK
+//when mouse interaction remember to make x over a bit because the grid is over a bit
 
 const XROWS = 15;
 const YCOLS = 29;
@@ -17,6 +18,8 @@ let grid;
 let cellSize; //size of squares
 let cat;
 let direction = ["up", "down", "left", "right"];
+let catStartX;
+let catStartY;
 
 function preload(){
   cat = loadImage("cat-head.png");
@@ -35,6 +38,17 @@ function setup() {
   }
 
   grid = restartGame(XROWS, YCOLS);
+  catStartX = cellSize*14;
+  catStartY = cellSize*7.5;
+
+  // grid[catStartY - 1][catStartX] = 0;
+  // grid[catStartY - 1][catStartX - 1] = 0;
+  // grid[catStartY - 1][catStartX + 1] = 0;
+  // grid[catStartY][catStartX - 1] = 0;
+  // grid[catStartY][catStartX + 1] = 0;
+  // grid[catStartY + 1][catStartX] = 0;
+  // grid[catStartY + 1][catStartX - 1] = 0;
+  // grid[catStartY + 1][catStartX + 1] = 0;
   drawCat();
 }
 
@@ -63,12 +77,13 @@ function moveCat(){
 }
 
 function drawCat(){
-  image(cat, cellSize*14, cellSize*8, cellSize, cellSize); //figure out x y
+  let catStartX = cellSize*14;
+  let catStartY = cellSize*7.5;
+  image(cat, catStartX, catStartY, cellSize, cellSize);
 
 }
 
 function toggleCell(x, y) {
-  //sanity check
   //0 = floor, 1 = wall. 
   if (x >= 0 && x < YCOLS && y >= 0 && y < XROWS) {
     if (grid[y][x] === 0) { 
@@ -90,7 +105,8 @@ function displayGame(grid) {
       if (grid[y][x] === 1) {
         fill(39, 93, 45);
       }
-      rect(x*cellSize, y*cellSize, cellSize, cellSize);
+      
+      rect(x*cellSize + cellSize/2, y*cellSize, cellSize, cellSize);
     }
   }
 }
