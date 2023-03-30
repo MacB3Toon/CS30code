@@ -6,10 +6,10 @@
 // - Uploaded an image and moved it based on where the user clicked
 
 //get cat to move to empty square randomly
-//set size of grid to be based on window width and height use performer 11?
+//set size of grid to be based on window width and height use 12.
 //make the cat change img when it moves
 //add texturess use 10
-//wherever the cat is in the moment is basically just displaying one cell DO THIS FIRST USE 10 AS DEMO IT SHOULD WORK
+//DRAW CAT AFTER REST OF GRID
 
 const XROWS = 15;
 const YCOLS = 29;
@@ -40,17 +40,17 @@ function setup() {
 
   //the cat
   catStartX = 14;
-  catStartY = 7.5;
+  catStartY = 7;
   grid[catStartY][catStartX] = "cat";
 
-  // grid[catStartY - 1][catStartX] = 0;
-  // grid[catStartY - 1][catStartX - 1] = 0;
-  // grid[catStartY - 1][catStartX + 1] = 0;
-  // grid[catStartY][catStartX - 1] = 0;
-  // grid[catStartY][catStartX + 1] = 0;
-  // grid[catStartY + 1][catStartX] = 0;
-  // grid[catStartY + 1][catStartX - 1] = 0;
-  // grid[catStartY + 1][catStartX + 1] = 0;
+  grid[catStartY - 1][catStartX] = 0;
+  grid[catStartY - 1][catStartX - 1] = 0;
+  grid[catStartY - 1][catStartX + 1] = 0;
+  grid[catStartY][catStartX - 1] = 0;
+  grid[catStartY][catStartX + 1] = 0;
+  grid[catStartY + 1][catStartX] = 0;
+  grid[catStartY + 1][catStartX - 1] = 0;
+  grid[catStartY + 1][catStartX + 1] = 0;
 }
 
 function draw() {
@@ -99,7 +99,7 @@ function displayGame(grid) {
         fill(39, 93, 45);
       }
       if (grid[y][x] === "cat"){
-        image(cat, catStartX, catStartY, cellSize, cellSize);
+        image(cat, x*cellSize  - cellSize/2, y*cellSize  - cellSize/2, cellSize, cellSize);
       }
       
       rect(x*cellSize, y*cellSize, cellSize, cellSize);
