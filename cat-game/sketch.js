@@ -10,7 +10,6 @@
 //make the cat change img when it moves
 //add texturess use 10
 //wherever the cat is in the moment is basically just displaying one cell DO THIS FIRST USE 10 AS DEMO IT SHOULD WORK
-//when mouse interaction remember to make x over a bit because the grid is over a bit
 
 const XROWS = 15;
 const YCOLS = 29;
@@ -38,8 +37,11 @@ function setup() {
   }
 
   grid = restartGame(XROWS, YCOLS);
-  catStartX = cellSize*14;
-  catStartY = cellSize*7.5;
+
+  //the cat
+  catStartX = 14;
+  catStartY = 7.5;
+  grid[catStartY][catStartX] = "cat";
 
   // grid[catStartY - 1][catStartX] = 0;
   // grid[catStartY - 1][catStartX - 1] = 0;
@@ -49,13 +51,11 @@ function setup() {
   // grid[catStartY + 1][catStartX] = 0;
   // grid[catStartY + 1][catStartX - 1] = 0;
   // grid[catStartY + 1][catStartX + 1] = 0;
-  drawCat();
 }
 
 function draw() {
   background(220);
   displayGame(grid);
-  drawCat();
 }
 
 function keyTyped(){
@@ -74,13 +74,6 @@ function mousePressed() {
 
 function moveCat(){
   random(direction);
-}
-
-function drawCat(){
-  let catStartX = cellSize*14;
-  let catStartY = cellSize*7.5;
-  image(cat, catStartX, catStartY, cellSize, cellSize);
-
 }
 
 function toggleCell(x, y) {
@@ -105,8 +98,11 @@ function displayGame(grid) {
       if (grid[y][x] === 1) {
         fill(39, 93, 45);
       }
+      if (grid[y][x] === "cat"){
+        image(cat, catStartX, catStartY, cellSize, cellSize);
+      }
       
-      rect(x*cellSize + cellSize/2, y*cellSize, cellSize, cellSize);
+      rect(x*cellSize, y*cellSize, cellSize, cellSize);
     }
   }
 }
