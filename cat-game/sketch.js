@@ -8,18 +8,16 @@
 //get cat to move to empty square randomly
 //set size of grid to be based on window width and height use 12.
 //make the cat change img when it moves
-//add texturess use 10
-//replace all cat start x and y to just catX cat Y
-//WHERE DID X AND Y COME FROM TO CHECK WHERE WALL IS LOOK AT TEN WHY DOES MOVECHARACTER TAKE IN X AND WHY FROM WHERE
 
 const XROWS = 15;
 const YCOLS = 29;
 let grid;
 let cellSize; //size of squares
 let cat;
-let direction = ["up", "down", "left", "right"];
-let catStartX;
-let catStartY;
+let choosedirection = ["up", "down", "left", "right"];
+let catX;
+let catY;
+let direction;
 
 function preload(){
   cat = loadImage("cat-head.png");
@@ -40,18 +38,18 @@ function setup() {
   grid = restartGame(XROWS, YCOLS);
 
   //the cat
-  catStartX = 14;
-  catStartY = 7;
-  grid[catStartY][catStartX] = "cat";
+  catX = 14;
+  catY = 7;
+  grid[catY][catX] = "cat";
 
-  grid[catStartY - 1][catStartX] = 0;
-  grid[catStartY - 1][catStartX - 1] = 0;
-  grid[catStartY - 1][catStartX + 1] = 0;
-  grid[catStartY][catStartX - 1] = 0;
-  grid[catStartY][catStartX + 1] = 0;
-  grid[catStartY + 1][catStartX] = 0;
-  grid[catStartY + 1][catStartX - 1] = 0;
-  grid[catStartY + 1][catStartX + 1] = 0;
+  grid[catY - 1][catX] = 0;
+  grid[catY - 1][catX - 1] = 0;
+  grid[catY - 1][catX + 1] = 0;
+  grid[catY][catX - 1] = 0;
+  grid[catY][catX + 1] = 0;
+  grid[catY + 1][catX] = 0;
+  grid[catY + 1][catX - 1] = 0;
+  grid[catY + 1][catX + 1] = 0;
   drawCat();
 }
 
@@ -75,35 +73,84 @@ function mousePressed() {
   moveCat();
 }
 
-function moveCat(direction){
+function moveCat(direction){ //the x and y taken in are the changes being made to where the character is
   if (direction === "up"){
     //check if going into wall wall = 1
-    if(grid[catY + y][catX + x] === 0){
+    if(grid[catY - cellSize][catX] === 0){
       let tempX = catX;
       let tempY = catY;
-
-      catX += x;
-      catY += y;
-
+      
+      catY -= cellSize;
+      
       //update the grid
       grid[catY][catX] = 9;
       grid[tempY][tempX] = 0;
     }
+    else{//if cat is going to run into a wall
+      let newDirection = [...direction];
+      newDirection -= direction;
+      moveCat(newDirection);
+    }
   }
   else if (direction === "down"){
+    //check if going into wall wall = 1
+    if(grid[catY + cellSize][catX] === 0){
+      let tempX = catX;
+      let tempY = catY;
     
+      catY += cellSize;
+    
+      //update the grid
+      grid[catY][catX] = 9;
+      grid[tempY][tempX] = 0;
+    }
+    else{//if cat is going to run into a wall
+      let newDirection = [...direction];
+      newDirection -= direction;
+      moveCat(newDirection);
+    }
   }
   else if (direction === "left"){
+    //check if going into wall wall = 1
+    if(grid[catY][catX - cellSize] === 0){
+      let tempX = catX;
+      let tempY = catY;
     
+      catX -= cellSize;
+    
+      //update the grid
+      grid[catY][catX] = 9;
+      grid[tempY][tempX] = 0;
+    }
+    else{//if cat is going to run into a wall
+      let newDirection = [...direction];
+      newDirection -= direction;
+      moveCat(newDirection);
+    }
   }
   else if (direction === "right"){
+    //check if going into wall wall = 1
+    if(grid[catY][catX + cellSize] === 0){
+      let tempX = catX;
+      let tempY = catY;
     
+      catX += cellSize;
+    
+      //update the grid
+      grid[catY][catX] = 9;
+      grid[tempY][tempX] = 0;
+    }
+    else{//if cat is going to run into a wall
+      let newDirection = [...direction];
+      newDirection -= direction;
+      moveCat(newDirection);
+    }
   }
 }
 
 function drawCat(){
-  image(cat, catStartX*cellSize  + cellSize/2, catStartY*cellSize  + cellSize/2, cellSize - 4.6, cellSize - 4.6);
-  direction = random(direction);
+  image(cat, catX*cellSize  + cellSize/2, catY*cellSize  + cellSize/2, cellSize - 1, cellSize - 1);
+  direction = random(choosedirection);
   return direction;
 }
 
@@ -125,16 +172,17 @@ function displayGame(grid) {
     for (let x = 0; x < YCOLS; x++) {
       if (grid[y][x] === 0) {
         fill(153, 255, 153);
+        rect(x*cellSize, y*cellSize, cellSize, cellSize);
       }
       if (grid[y][x] === 1) {
         fill(39, 93, 45);
+        rect(x*cellSize, y*cellSize, cellSize, cellSize);
       }
       if (grid[y][x] === "cat"){
-        catStartX = x;
-        catStartY = y;
+        catX = x;
+        catY = y;
       }
       
-      rect(x*cellSize, y*cellSize, cellSize, cellSize);
       
     }
   }
