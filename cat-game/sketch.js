@@ -9,7 +9,8 @@
 //set size of grid to be based on window width and height use 12.
 //make the cat change img when it moves
 //add texturess use 10
-//DRAW CAT AFTER REST OF GRID
+//replace all cat start x and y to just catX cat Y
+//WHERE DID X AND Y COME FROM TO CHECK WHERE WALL IS LOOK AT TEN WHY DOES MOVECHARACTER TAKE IN X AND WHY FROM WHERE
 
 const XROWS = 15;
 const YCOLS = 29;
@@ -51,11 +52,13 @@ function setup() {
   grid[catStartY + 1][catStartX] = 0;
   grid[catStartY + 1][catStartX - 1] = 0;
   grid[catStartY + 1][catStartX + 1] = 0;
+  drawCat();
 }
 
 function draw() {
   background(220);
   displayGame(grid);
+  drawCat();
 }
 
 function keyTyped(){
@@ -72,8 +75,36 @@ function mousePressed() {
   moveCat();
 }
 
-function moveCat(){
-  random(direction);
+function moveCat(direction){
+  if (direction === "up"){
+    //check if going into wall wall = 1
+    if(grid[catY + y][catX + x] === 0){
+      let tempX = catX;
+      let tempY = catY;
+
+      catX += x;
+      catY += y;
+
+      //update the grid
+      grid[catY][catX] = 9;
+      grid[tempY][tempX] = 0;
+    }
+  }
+  else if (direction === "down"){
+    
+  }
+  else if (direction === "left"){
+    
+  }
+  else if (direction === "right"){
+    
+  }
+}
+
+function drawCat(){
+  image(cat, catStartX*cellSize  + cellSize/2, catStartY*cellSize  + cellSize/2, cellSize - 4.6, cellSize - 4.6);
+  direction = random(direction);
+  return direction;
 }
 
 function toggleCell(x, y) {
@@ -99,10 +130,12 @@ function displayGame(grid) {
         fill(39, 93, 45);
       }
       if (grid[y][x] === "cat"){
-        image(cat, x*cellSize  - cellSize/2, y*cellSize  - cellSize/2, cellSize, cellSize);
+        catStartX = x;
+        catStartY = y;
       }
       
       rect(x*cellSize, y*cellSize, cellSize, cellSize);
+      
     }
   }
 }
