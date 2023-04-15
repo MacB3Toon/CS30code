@@ -7,8 +7,12 @@
 -[Terraingeneration](4-terrain)
 -[Perlin and Timing](6-perlin)
 -[Grid_demo] (7-2d-grid)
--[Color game] (8-colorgame)
--[Game of life] (9-Gameoflife)
+-[Color game](8-colorgame)
+-[Game of life](9-Gameoflife)
+-[Character in grid](10-character-in-grid)
+-[platformer](11-platformer)
+-[sudoku starter](12-sudokudemo)
+-[scribble](13-scribbledemo)
 
 ##projects
 -[Arrays and object notation](array-assignment)
