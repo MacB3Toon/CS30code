@@ -25,6 +25,7 @@ function preload(){
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
+
   grid = restartGame(XROWS, YCOLS);
 
   //create biggest grid possible
@@ -42,6 +43,7 @@ function setup() {
   catY = 7;
   grid[catY][catX] = "cat";
 
+  //make spaces around cat empty
   grid[catY - 1][catX] = 0;
   grid[catY - 1][catX - 1] = 0;
   grid[catY - 1][catX + 1] = 0;
@@ -50,13 +52,14 @@ function setup() {
   grid[catY + 1][catX] = 0;
   grid[catY + 1][catX - 1] = 0;
   grid[catY + 1][catX + 1] = 0;
-  drawCat();
+
+  drawCat(catY, catX);
 }
 
 function draw() {
   background(220);
   displayGame(grid);
-  drawCat();
+  direction = drawCat(catY, catX);
 }
 
 function keyTyped(){
@@ -70,85 +73,85 @@ function mousePressed() {
   let y = Math.floor(mouseY/cellSize);
 
   toggleCell(x, y);
-  moveCat();
+  moveCat(direction, catY, catX);
 }
 
-function moveCat(direction){ //the x and y taken in are the changes being made to where the character is
+function moveCat(direction, catY, catX){ 
   if (direction === "up"){
     //check if going into wall wall = 1
-    if(grid[catY - cellSize][catX] === 0){
+    if(grid[catY - 1][catX] === 0){
       let tempX = catX;
       let tempY = catY;
       
-      catY -= cellSize;
+      catY -= 1;
       
       //update the grid
-      grid[catY][catX] = 9;
+      grid[catY][catX] = "cat";
       grid[tempY][tempX] = 0;
     }
     else{//if cat is going to run into a wall
       let newDirection = [...direction];
       newDirection -= direction;
-      moveCat(newDirection);
+      moveCat(newDirection, catY, catX);
     }
   }
   else if (direction === "down"){
     //check if going into wall wall = 1
-    if(grid[catY + cellSize][catX] === 0){
+    if(grid[catY + 1][catX] === 0){
       let tempX = catX;
       let tempY = catY;
     
-      catY += cellSize;
+      catY += 1;
     
       //update the grid
-      grid[catY][catX] = 9;
+      grid[catY][catX] = "cat";
       grid[tempY][tempX] = 0;
     }
     else{//if cat is going to run into a wall
       let newDirection = [...direction];
       newDirection -= direction;
-      moveCat(newDirection);
+      moveCat(newDirection, catY, catX);
     }
   }
   else if (direction === "left"){
     //check if going into wall wall = 1
-    if(grid[catY][catX - cellSize] === 0){
+    if(grid[catY][catX - 1] === 0){
       let tempX = catX;
       let tempY = catY;
     
-      catX -= cellSize;
+      catX -= 1;
     
       //update the grid
-      grid[catY][catX] = 9;
+      grid[catY][catX] = "cat";
       grid[tempY][tempX] = 0;
     }
     else{//if cat is going to run into a wall
       let newDirection = [...direction];
       newDirection -= direction;
-      moveCat(newDirection);
+      moveCat(newDirection, catY, catX);
     }
   }
   else if (direction === "right"){
     //check if going into wall wall = 1
-    if(grid[catY][catX + cellSize] === 0){
+    if(grid[catY][catX + 1] === 0){
       let tempX = catX;
       let tempY = catY;
     
-      catX += cellSize;
+      catX += 1;
     
       //update the grid
-      grid[catY][catX] = 9;
+      grid[catY][catX] = "cat";
       grid[tempY][tempX] = 0;
     }
     else{//if cat is going to run into a wall
       let newDirection = [...direction];
       newDirection -= direction;
-      moveCat(newDirection);
+      moveCat(newDirection, catY, catX);
     }
   }
 }
 
-function drawCat(){
+function drawCat(catY, catX){
   image(cat, catX*cellSize  + cellSize/2, catY*cellSize  + cellSize/2, cellSize - 1, cellSize - 1);
   direction = random(choosedirection);
   return direction;
@@ -181,9 +184,8 @@ function displayGame(grid) {
       if (grid[y][x] === "cat"){
         catX = x;
         catY = y;
+        drawCat(catY, catX);
       }
-      
-      
     }
   }
 }
