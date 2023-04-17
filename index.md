@@ -13,6 +13,7 @@
 -[platformer](11-platformer)
 -[sudoku starter](12-sudokudemo)
 -[scribble](13-scribbledemo)
+-[Walker OOP](14-walkeroop)
 
 ##projects
 -[Arrays and object notation](array-assignment)
