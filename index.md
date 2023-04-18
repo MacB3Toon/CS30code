@@ -14,6 +14,7 @@
 -[sudoku starter](12-sudokudemo)
 -[scribble](13-scribbledemo)
 -[Walker OOP](14-walkeroop)
+-[fireworks OOP](15-fireworks)
 
 ##projects
 -[Arrays and object notation](array-assignment)
