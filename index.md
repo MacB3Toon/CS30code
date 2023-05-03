@@ -16,6 +16,7 @@
 -[Walker OOP](14-walkeroop)
 -[fireworks OOP](15-fireworks)
 -[ball array](16-ballarray)
+-[using timers](17-timers)
 
 ##projects
 -[Arrays and object notation](array-assignment)
